@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 using System.Data;
 using Python.Runtime;
 using System;
+using WebApplication3.Models;
+using Microsoft.Extensions.Options;
 
 namespace WebApplication3.Pages
 {
     public class IndexModel : PageModel
     {
+        private readonly PythonSettings _pythonSettings;
+
+        public IndexModel(IOptions<PythonSettings> pythonSettings)
+        {
+            _pythonSettings = pythonSettings.Value;
+        }
+
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
@@ -33,53 +42,35 @@ namespace WebApplication3.Pages
                 return Page();
             }
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", file.FileName);
-
-            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            // Read the uploaded file into a memory stream
+            using (var memoryStream = new MemoryStream())
             {
-                await file.CopyToAsync(stream);
-            }
+                await file.CopyToAsync(memoryStream);
+                memoryStream.Position = 0; // Reset stream position
 
-            // Set Python DLL path
-            string pythonDll = @"C:\Users\Tom Lynch\AppData\Local\Programs\Python\Python312\Python312.dll";
-            Runtime.PythonDLL = pythonDll;
+                string pythonDll = _pythonSettings.PythonDll;
+                Runtime.PythonDLL = pythonDll;
 
-            // Log the value of PYTHONNET_PYDLL again to confirm
-            string currentPythonDll = Environment.GetEnvironmentVariable("PYTHONNET_PYDLL");
-            Console.WriteLine($"PYTHONNET_PYDLL is now set to: {currentPythonDll}");
+                PythonEngine.Initialize();
 
-            // Set the Python home to the virtual environment
-            string pythonHome = @"C:\temp\ironpython-env";
-            SetEnvironmentVariable("PYTHONHOME", pythonHome);
+                // Read the file using Python.NET
+                Transactions = ReadExcelFile(memoryStream);
 
-            // Set the Python path to the site-packages directory of the virtual environment
-            string pythonPath = System.IO.Path.Combine(pythonHome, "Lib", "site-packages");
-            SetEnvironmentVariable("PYTHONPATH", pythonPath);
+                AppContext.SetSwitch("System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization", true);
 
-            // Additional path settings
-            string scriptsPath = System.IO.Path.Combine(pythonHome, "Scripts");
-            SetEnvironmentVariable("PATH", scriptsPath + ";" + Environment.GetEnvironmentVariable("PATH"));
-
-            PythonEngine.Initialize();
-
-            // Read the file using Python.NET
-            Transactions = ReadExcelFile(filePath);
-
-            AppContext.SetSwitch("System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization", true);
-            // Shutdown Python.NET
-            try
-            {
-                PythonEngine.Shutdown();
-            }
-            catch (NotSupportedException _) { }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+                // Shutdown Python.NET
+                try
+                {
+                    PythonEngine.Shutdown();
+                }
+                catch (NotSupportedException _) { }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
 
                 AppContext.SetSwitch("System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization", false);
+            }
 
             Message = "File uploaded successfully!";
             return Page();
@@ -90,7 +81,7 @@ namespace WebApplication3.Pages
             Environment.SetEnvironmentVariable(variable, value, EnvironmentVariableTarget.Process);
         }
 
-        private DataTable ReadExcelFile(string filePath)
+        private DataTable ReadExcelFile(MemoryStream memoryStream)
         {
             DataTable transactions = new DataTable();
             transactions.Columns.Add("Date", typeof(string));
@@ -103,10 +94,18 @@ namespace WebApplication3.Pages
 
                 // Ensure the site-packages directory is in sys.path
                 dynamic sys = Py.Import("sys");
-                sys.path.append(@"C:\temp\ironpython-env\Lib\site-packages");
+                sys.path.append(_pythonSettings.PackagesDir);
 
                 dynamic pandas = Py.Import("pandas");
-                dynamic df = pandas.read_excel(filePath);
+                dynamic io = Py.Import("io");
+
+                // Convert the MemoryStream to a byte array and create a BytesIO object
+                memoryStream.Position = 0;
+                byte[] byteArray = memoryStream.ToArray();
+                dynamic buffer = io.BytesIO(byteArray);
+
+                // Read the Excel file from the BytesIO object
+                dynamic df = pandas.read_excel(buffer);
 
                 foreach (var row in df.itertuples())
                 {

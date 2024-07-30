@@ -1,7 +1,13 @@
+using WebApplication3.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Add services to the container.
+builder.Services.Configure<PythonSettings>(builder.Configuration.GetSection("Python"));
+
 
 var app = builder.Build();
 
