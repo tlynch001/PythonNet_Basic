@@ -29,9 +29,7 @@ namespace WebApplication3.Pages
 
         public void OnGet()
         {
-            // Log the value of PYTHONNET_PYDLL
-            string pythonDll = Environment.GetEnvironmentVariable("PYTHONNET_PYDLL");
-            Console.WriteLine($"PYTHONNET_PYDLL is set to: {pythonDll}");
+
         }
 
         public async Task<IActionResult> OnPostAsync(IFormFile file)
