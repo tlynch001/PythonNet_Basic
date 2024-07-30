@@ -1,0 +1,312 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono auto generated)
+mono_crash.*
+
+# User-specific files (VSCode)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.vscode/*
+
+# User-specific files (JetBrains Rider)
+.idea/*
+*.sln.iml
+
+# User-specific files (VIM)
+*.swp
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Build results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# Benchmark Results
+BenchmarkDotNet.Artifacts/
+
+# Visual Studio 2019
+.vs2019/
+
+# Visual Studio 2022
+.vs2022/
+
+# Visual Studio
+.vs/
+[Tt]est[Rr]esult*/ 
+[Aa]pp[Bb]rowser/
+*.jfm
+[Bb]uild[Ll]og.*
+[Bb]uild[Ee]rrors.*
+[Bb]uild[Tt]ime.*
+[Bb]uild[Ee]rrors.*
+*.vcxproj.user.*
+*.rsuser
+*.userprefs
+
+# NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# MSTest
+*.testsettings
+*.vsmdi
+*.pdb
+TestResults
+[Dd]ebugPS/
+[Rr]eleasePS/
+*.opendb
+
+# Visual Studio 2019 and beyond
+.vscode/
+.vscode/*
+
+# Rider
+.idea/
+.idea/*
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# StyleCop
+StyleCop.Cache/
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+
+# Chutzpah Test files
+_Chutzpah/*
+!_Chutzpah/_chutzpah.json
+
+# WebDav
+*.dav
+
+# CMake
+CMakeLists.txt
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+cmake_install.cmake
+CTestTestfile.cmake
+*.dir
+*.vcxproj.user.*
+*.vcxproj.filters
+*.pdb
+build/
+_build/
+*.output
+[Cc]MakeLists.txt
+
+# Subdirectories of bin/ and obj/
+bin/
+obj/
+
+# Exclude NuGet Packages
+*.nupkg
+*.snupkg
+nuget.exe
+packages/
+*.psmdcp
+*.nuspec
+.nuget/
+
+# ASP.NET Web API / OWIN
+App_Data/
+App_Browsers/
+App_Code/
+App_GlobalResources/
+App_LocalResources/
+App_Start/
+App_Themes/
+Assets/
+ClientBin/
+Views/
+Content/
+Fonts/
+Scripts/
+Bundles/
+Css/
+Images/
+Html/
+Logs/
+packages/
+wwwroot/
+
+# Serverless
+bin/
+obj/
+
+# JetBrains Rider
+.idea/
+.idea/*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Temporary files
+*.~undo
+*.~tmp
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Web server logs
+logs/
+
+# NPM
+node_modules/
+
+# Yarn
+.yarn/
+.pnp.*
+.yarn-cache/
+.yarnrc*
+.pnp.*
+
+# Project directory config file
+.project
+
+# Node.js files
+*.log
+*.log.*
+
+# Optional VS Code IDE settings
+.vscode/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Web Components
+.vscode/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# JetBrains Rider
+.idea/
+.idea/*
+
+# Visual Studio
+.vs/
+.vscode/
+node_modules/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Temporary files
+*.~undo
+*.~tmp
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Web server logs
+logs/
+
+# NPM
+node_modules/
+
+# Yarn
+.yarn/
+.pnp.*
+.yarn-cache/
+.yarnrc*
+.pnp.*
+
+# Project directory config file
+.project
+
+# Node.js files
+*.log
+*.log.*
+
+# Optional VS Code IDE settings
+.vscode/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Web Components
+.vscode/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Optional npm cache directory
+.npm

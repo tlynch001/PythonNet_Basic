@@ -1,0 +1,46 @@
+﻿@page
+@model WebApplication3.Pages.IndexModel
+@{
+    ViewData["Title"] = "File Upload";
+}
+
+<h2>File Upload</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Choose file:</label>
+        <input type="file" name="file" />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+@if (Model.Transactions != null && Model.Transactions.Rows.Count > 0)
+{
+    <h3>Transactions for July</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Transactions.Rows)
+            {
+                <tr>
+                    <td>@row["Date"]</td>
+                    <td>@row["Amount"]</td>
+                    <td>@row["Category"]</td>
+                    <td>@row["Description"]</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
